@@ -12,14 +12,10 @@ import {
 } from "react-native";
 import SearchResults from "./SearchResults";
 
-function urlForQueryAndPage(key, value, pageNumber) {
+function urlForQueryAndPage(key, value) {
   const data = {
-    page: "uk",
-    pretty: "1",
-    encoding: "json",
-    listing_type: "buy",
-    action: "search_listings",
-    page: pageNumber
+    per_page: "15",
+    page: 1
   };
   data[key] = value;
 
@@ -27,7 +23,7 @@ function urlForQueryAndPage(key, value, pageNumber) {
     .map(key => key + "=" + encodeURIComponent(data[key]))
     .join("&");
 
-  return "https://api.nestoria.co.uk/api?" + querystring;
+  return "https://bikeindex.org:443/api/v3/search?" + querystring;
 }
 
 export default class SearchScreen extends React.Component {
@@ -38,7 +34,7 @@ export default class SearchScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchString: "london",
+      searchString: "Author",
       isLoading: false,
       message: ""
     };
@@ -48,19 +44,20 @@ export default class SearchScreen extends React.Component {
     this.setState({ isLoading: true });
 
     fetch(query)
-      .then(response => response.json())
-      .then(json => this.handleResponse(json.response))
-      .catch(error =>
+      .then(bikes => bikes.json())
+      .then(json => this.handleResponse(json.bikes))
+      .catch(error => {
         this.setState({
           isLoading: false,
           message: "Something bad happened " + error
-        })
-      );
+        });
+      });
   };
 
   onSearchPressed = () => {
     Keyboard.dismiss();
-    const query = urlForQueryAndPage("place_name", this.state.searchString, 1);
+    const query = urlForQueryAndPage("manufacturer", this.state.searchString);
+
     this.executeQuery(query);
   };
 
@@ -68,15 +65,17 @@ export default class SearchScreen extends React.Component {
     this.setState({ searchString: event.nativeEvent.text });
   };
 
-  handleResponse = response => {
+  handleResponse = bikes => {
     this.setState({ isLoading: false, message: "" });
-    if (response.application_response_code.substr(0, 1) === "1") {
-      console.log(response.listings);
+    if (bikes.length > 0) {
       this.props.navigation.navigate("SearchResults", {
-        listings: response.listings
+        bikes
       });
     } else {
-      this.setState({ message: "Location not recognized; please try again." });
+      this.setState({
+        message:
+          "You are lucky! No bike with this name has been stolen. Try again."
+      });
     }
   };
 
@@ -97,7 +96,7 @@ export default class SearchScreen extends React.Component {
             <Button onPress={this.onSearchPressed} color="#48BBEC" title="Go" />
           </View>
           <Image
-            source={require("./Resources/house.png")}
+            source={require("./Resources/bike.png")}
             style={styles.image}
           />
           {spinner}

@@ -15,14 +15,19 @@ class ListItem extends React.PureComponent {
 
   render() {
     const item = this.props.item;
-    const price = item.price_formatted.split(" ")[0];
     return (
       <TouchableHighlight onPress={this.onPress} underlayColor="#dddddd">
         <View>
           <View style={styles.rowContainer}>
-            <Image style={styles.thumb} source={{ uri: item.img_url }} />
+            <Image
+              style={styles.thumb}
+              source={
+                item.thumb
+                  ? { uri: item.thumb }
+                  : require("./Resources/noimage.png")
+              }
+            />
             <View style={styles.textContainer}>
-              <Text style={styles.price}>{price}</Text>
               <Text style={styles.title} numberOfLines={1}>
                 {item.title}
               </Text>
@@ -50,7 +55,7 @@ export default class SearchResults extends Component {
     const { params } = this.props.navigation.state;
     return (
       <FlatList
-        data={params.listings}
+        data={params.bikes}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
       />
