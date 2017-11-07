@@ -7,6 +7,7 @@ import {
   FlatList,
   Text
 } from "react-native";
+import SearchResult from "./SearchResult";
 
 class ListItem extends React.PureComponent {
   onPress = () => {
@@ -41,6 +42,10 @@ class ListItem extends React.PureComponent {
 }
 
 export default class SearchResults extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: `Search term: ${navigation.state.params.searchString}`
+  });
+
   keyExtractor = (item, index) => index;
 
   renderItem = ({ item, index }) => (
@@ -48,7 +53,9 @@ export default class SearchResults extends Component {
   );
 
   onPressItem = index => {
-    console.log("Pressed row: " + index);
+    this.props.navigation.navigate("SearchResult", {
+      item: this.props.navigation.state.params.bikes[index]
+    });
   };
 
   render() {

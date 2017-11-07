@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import {
   StyleSheet,
-  Button,
   Text,
   ActivityIndicator,
   Image,
   TextInput,
   View,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  TouchableOpacity
 } from "react-native";
 import SearchResults from "./SearchResults";
 
@@ -28,7 +28,7 @@ function urlForQueryAndPage(key, value) {
 
 export default class SearchScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Search for properties!"
+    title: "Search for stole bikes"
   });
 
   constructor(props) {
@@ -69,7 +69,8 @@ export default class SearchScreen extends React.Component {
     this.setState({ isLoading: false, message: "" });
     if (bikes.length > 0) {
       this.props.navigation.navigate("SearchResults", {
-        bikes
+        bikes,
+        searchString: this.state.searchString
       });
     } else {
       this.setState({
@@ -91,9 +92,14 @@ export default class SearchScreen extends React.Component {
               style={styles.searchInput}
               value={this.state.searchString}
               onChange={this.onSearchTextChanged}
-              placeholder="Search via name or postcode"
+              placeholder="Search via name"
             />
-            <Button onPress={this.onSearchPressed} color="#48BBEC" title="Go" />
+            <TouchableOpacity
+              onPress={this.onSearchPressed}
+              style={styles.searchButton}
+            >
+              <Text style={styles.searchButtonText}>Search</Text>
+            </TouchableOpacity>
           </View>
           <Image
             source={require("./Resources/bike.png")}
@@ -117,21 +123,33 @@ const styles = StyleSheet.create({
   flowRight: {
     flexDirection: "row",
     alignItems: "center",
-    alignSelf: "stretch"
+    alignSelf: "stretch",
+    padding: 20
   },
   searchInput: {
-    height: 36,
-    padding: 4,
+    height: 40,
+    padding: 6,
     marginRight: 5,
     flexGrow: 1,
     fontSize: 18,
-    borderWidth: 1,
+    borderWidth: 2,
     borderColor: "#48BBEC",
-    borderRadius: 8,
     color: "#48BBEC"
   },
+  searchButton: {
+    height: 40,
+    width: 80,
+    backgroundColor: "#48BBEC",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  searchButtonText: {
+    color: "white",
+    fontSize: 18
+  },
   image: {
-    width: 217,
-    height: 138
+    width: 245,
+    height: 143,
+    marginTop: 20
   }
 });

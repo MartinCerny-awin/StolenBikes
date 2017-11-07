@@ -9,6 +9,7 @@ import { StackNavigator } from "react-navigation";
 
 import HomeScreen from "./HomeScreen";
 import SearchResults from "./SearchResults";
+import SearchResult from "./SearchResult";
 import SearchScreen from "./SearchScreen";
 import ChatScreen from "./ChatScreen";
 
@@ -16,7 +17,8 @@ const SimpleApp = StackNavigator({
   Home: { screen: HomeScreen },
   Search: { screen: SearchScreen },
   Chat: { screen: ChatScreen },
-  SearchResults: { screen: SearchResults }
+  SearchResults: { screen: SearchResults },
+  SearchResult: { screen: SearchResult }
 });
 
 export default class App extends Component<{}> {

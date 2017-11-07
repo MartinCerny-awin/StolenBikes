@@ -14,18 +14,9 @@ export default class HomeScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.instructions}>Search for houses to buy!</Text>
-        <Text style={styles.instructions}>
-          Search by place-name or postcode.
-        </Text>
-        <Button
-          onPress={() => navigate("Chat", { user: "Martin" })}
-          title="You can still chat with Lucy"
-        />
-        <Button
-          onPress={() => navigate("Search")}
-          title="Search for properties"
-        />
+        <Text style={styles.text}>Search for stole bikes</Text>
+        <Text style={styles.text}>Search by model or manufacturer.</Text>
+        <Button onPress={() => navigate("Search")} title="Search for bikes" />
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
@@ -39,9 +30,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#F5FCFF"
   },
-  instructions: {
+  text: {
     textAlign: "center",
     color: "#333333",
-    marginBottom: 20
+    marginBottom: 5
+  },
+  instructions: {
+    marginTop: 100
   }
 });
