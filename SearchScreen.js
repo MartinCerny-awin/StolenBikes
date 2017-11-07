@@ -28,7 +28,7 @@ function urlForQueryAndPage(key, value) {
 
 export default class SearchScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: "Search for stole bikes"
+    title: "Search for stolen bikes"
   });
 
   constructor(props) {
@@ -107,6 +107,10 @@ export default class SearchScreen extends React.Component {
           />
           {spinner}
           <Text style={styles.description}>{this.state.message}</Text>
+          <Text style={styles.text}>
+            You can search any brand such as: Author, GP, Cannondale,
+            Specialized, Redline, Trek, Schwinn, Torker or Manhattan
+          </Text>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -119,6 +123,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF"
+  },
+  text: {
+    padding: 20
   },
   flowRight: {
     flexDirection: "row",

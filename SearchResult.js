@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Dimensions, StyleSheet, Image, Text, View } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  Image,
+  Text,
+  ScrollView,
+  View
+} from "react-native";
 
 export default class SearchResult extends React.Component {
   // Nav options can be defined as a function of the screen's props:
@@ -47,7 +54,7 @@ export default class SearchResult extends React.Component {
     // The screen's current route is passed in to `props.navigation.state`:
     const { item } = this.props.navigation.state.params;
     return (
-      <View>
+      <ScrollView>
         <Image
           style={{ width: this.state.width, height: this.state.height }}
           source={
@@ -68,7 +75,7 @@ export default class SearchResult extends React.Component {
           ))}
         </View>
         <Text style={styles.text}>Stolen date: {item.date_stolen}</Text>
-      </View>
+      </ScrollView>
     );
   }
 }
