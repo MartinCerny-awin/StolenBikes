@@ -87,6 +87,10 @@ export default class SearchScreen extends React.Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <Text style={styles.text}>
+            You can search any brand such as: Author, GP, Cannondale,
+            Specialized, Redline, Trek, Schwinn, Torker or Manhattan
+          </Text>
           <View style={styles.flowRight}>
             <TextInput
               style={styles.searchInput}
@@ -107,10 +111,6 @@ export default class SearchScreen extends React.Component {
           />
           {spinner}
           <Text style={styles.description}>{this.state.message}</Text>
-          <Text style={styles.text}>
-            You can search any brand such as: Author, GP, Cannondale,
-            Specialized, Redline, Trek, Schwinn, Torker or Manhattan
-          </Text>
         </View>
       </TouchableWithoutFeedback>
     );
