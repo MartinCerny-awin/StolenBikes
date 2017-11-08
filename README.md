@@ -9,6 +9,6 @@ The app can be downloaded from my Google Drive https://drive.google.com/open?id=
 4) Select "Trust".
 
 # About the App
-Application is using Bike Index. This index enables users to register bicycles to protect them from burglars. So far, 31,356 bikes have been registered and over 2,118 stolen bikes have been recovered. In the (main site)[https://bikeindex.org/documentation/api_v3] developers can find more information about the JSON API, that includes support to cross-origin resource sharing (CORS), a spec that permits web apps to make AJAX calls without workarounds.
+Application is using Bike Index. This index enables users to register bicycles to protect them from burglars. So far, 31,356 bikes have been registered and over 2,118 stolen bikes have been recovered. In the [main site](https://bikeindex.org/documentation/api_v3) developers can find more information about the JSON API, that includes support to cross-origin resource sharing (CORS), a spec that permits web apps to make AJAX calls without workarounds.
 
 Only the stolen bikes can be searched in the app.
